@@ -1,0 +1,3 @@
+[submodule "cordova-plugin-printer"]
+	path = cordova-plugin-printer
+	url = https://github.com/moderna/cordova-plugin-printer.git

@@ -57,6 +57,8 @@ Printer.prototype = {
             return;
         }
 
+        console.log("Print Content: " + content);
+
         cordova.exec(null, null, 'Printer', 'print', [page, options]);
     }
 };
