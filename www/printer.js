@@ -1,4 +1,4 @@
-cordova.define("de.appplant.cordova.plugin.printer.Printer", function(require, exports, module) {/*
+/*
  Copyright 2013 appPlant UG
 
  Licensed to the Apache Software Foundation (ASF) under one
@@ -19,41 +19,41 @@ cordova.define("de.appplant.cordova.plugin.printer.Printer", function(require, e
  under the License.
  */
 
-    var Printer = function () {
+var Printer = function () {
 
-    };
+};
 
-    Printer.prototype = {
-        /**
-         * Checks if the printer service is available.
-         *
-         * @param {Function} callback
-         */
-        isServiceAvailable: function (callback) {
-            cordova.exec(callback, null, 'Printer', 'isServiceAvailable', []);
-        },
+Printer.prototype = {
+    /**
+     * Checks if the printer service is available.
+     *
+     * @param {Function} callback
+     */
+    isServiceAvailable: function (callback) {
+        cordova.exec(callback, null, 'Printer', 'isServiceAvailable', []);
+    },
 
-        /**
-         * Prints the html content.
-         *
-         * @param {String}  content HTML string or DOM node (if latter, innerHTML is used to get the contents)
-         * @param {Object?} options platform specific options
-         * @param {Function} successCallback
-         * @param {Function} errorCallback
-         */
-        print: function (content, options, successCallback, errorCallback) {
-            var page    = content.innerHTML || content,
-                options = options || {};
+    /**
+     * Prints the html content.
+     *
+     * @param {String}  content HTML string or DOM node (if latter, innerHTML is used to get the contents)
+     * @param {Object?} options platform specific options
+     * @param {Function} successCallback
+     * @param {Function} errorCallback
+     */
+    print: function (content, options, successCallback, errorCallback) {
+        var page    = content.innerHTML || content,
+            options = options || {};
 
-            if (typeof page != 'string') {
-                console.log('Print function requires an HTML string. Not an object');
-                return;
-            }
-
-            cordova.exec(successCallback, errorCallback, 'Printer', 'print', [page, options]);
+        if (typeof page != 'string') {
+            console.log('Print function requires an HTML string. Not an object');
+            return;
         }
-    };
 
-    var plugin = new Printer();
+        cordova.exec(successCallback, errorCallback, 'Printer', 'print', [page, options]);
+    }
+};
 
-    module.exports = plugin;});
+var plugin = new Printer();
+
+module.exports = plugin;

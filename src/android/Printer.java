@@ -201,6 +201,11 @@ public class Printer extends CordovaPlugin
 	            	
 					// Create a WebView object specifically for printing
 					WebView webView = new WebView(self.cordova.getActivity());
+					webView.getSettings().setJavaScriptEnabled(false);
+					webView.getSettings().setDefaultTextEncodingName("utf-8");
+					webView.setDrawingCacheEnabled(true);
+					webView.setVisibility(View.INVISIBLE);
+					// self.cordova.getActivity().addContentView(webView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 					webView.setWebViewClient( new WebViewClient()
 					{
 							public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -232,12 +237,12 @@ public class Printer extends CordovaPlugin
 							}
 					});
 					
-					// Reverse engineer base url (assets/www) from the cordovas webView url
+					// Reverse engineer base url (assets/www) from the cordova webView url
 			        String baseURL = self.webView.getUrl();
 			        baseURL        = baseURL.substring(0, baseURL.lastIndexOf('/') + 1);
 			        
 			        // Load content into the print webview
-					webView.loadDataWithBaseURL(baseURL, content, "text/HTML", "UTF-8", null);
+					webView.loadDataWithBaseURL(baseURL, content, "text/html", "utf-8", null);
             	}
 
             }
@@ -352,6 +357,7 @@ public class Printer extends CordovaPlugin
         
         page.setVisibility(View.INVISIBLE);
         page.getSettings().setJavaScriptEnabled(false);
+        page.getSettings().setDefaultTextEncodingName("utf-8");
         page.setDrawingCacheEnabled(true);
         
         page.setWebViewClient( new WebViewClient() {
@@ -383,7 +389,7 @@ public class Printer extends CordovaPlugin
                baseURL = baseURL.substring(0, baseURL.lastIndexOf('/') + 1);
 
                activity.addContentView(page, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        page.loadDataWithBaseURL(baseURL, content, "text/html", "UTF-8", null);
+        page.loadDataWithBaseURL(baseURL, content, "text/html", "utf-8", null);
     }
     
     /**
