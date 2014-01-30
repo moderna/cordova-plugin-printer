@@ -8,7 +8,7 @@
     <name>Printer</name>
 
     <description>A bunch of printig plugins for Cordova 3.x.x</description>
-    <repo>https://github.com/katzer/cordova-plugin-printer.git</repo>
+    <repo>https://github.com/moderna/cordova-plugin-printer.git</repo>
     <keywords>print, printer, ios, android, kitkat</keywords>
     <license>Apache 2.0</license>
 
@@ -48,11 +48,16 @@
         </config-file>
 
         <source-file src="src/android/Printer.java" target-dir="src/de/appplant/cordova/plugin/printer" />
-        <source-file src="src/android/iText-4.2.0.jar" target-dir="libs" />
+        <source-file src="src/android/iText-4.2.0.jar" target-dir="libs/" />
     </platform>
 
     <info>
-        For Android the file "libs/iText-4.2.0.jar" has to be added to the "Java Build Path".
+        For android This plugin requires libz.dylib that is available in the iOS SDK.
+        If you will face a linker errors, you need to add the library manually.
+
+        If you want to print more than 4 pages on Android lower 4.4 iText will consume
+        too much memory. Add 'android:largeHeap="true"' as application attribute to
+        the Manifest.xml to "solve" this issue.
     </info>
 
 </plugin>

@@ -477,12 +477,14 @@ public class Printer extends CordovaPlugin
             }
             
             // create pdf
+            Log.v(LOG_TAG, "Creating pdf" );
             Document document = new Document();
             File filePdf = new File(dir, this.printTitle + ".pdf"); // change the output name of the pdf here
             PdfWriter.getInstance(document,new FileOutputStream(filePdf));
             document.open();
             for( int i=1; i<=currPageCount; ++i )
             {
+                Log.v(LOG_TAG, "Adding page nr. " + i + " to the pdf file." );
             	file = new File(dir, "print-page-"+i+".png");
             	Image image = Image.getInstance (file.getAbsolutePath());
                 image.scaleToFit( (float)pageWidth, 9999);
