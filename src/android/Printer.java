@@ -490,6 +490,7 @@ public class Printer extends CordovaPlugin
                 image.scaleToFit( (float)pageWidth, 9999);
             	image.setAlignment(Element.ALIGN_CENTER);
             	document.add(image);
+            	document.newPage();
             }
             document.close();
             
