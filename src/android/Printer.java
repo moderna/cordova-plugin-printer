@@ -24,6 +24,12 @@
    see: https://github.com/ymasory/iText-4.2.0
 */
 
+/*
+  Enhancements (Pretty Print on Android < 4.4) - 2014 Modern Alchemists OG
+  License: http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+
 package de.appplant.cordova.plugin.printer;
 
 import java.io.File;
