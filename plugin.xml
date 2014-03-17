@@ -29,9 +29,9 @@
     <platform name="ios">
 
         <config-file target="config.xml" parent="/*">
-        <feature name="Printer">
-            <param name="ios-package" value="Printer"/>
-        </feature>
+        	<feature name="Printer">
+            	<param name="ios-package" value="Printer"/>
+        	</feature>
         </config-file>
 
         <header-file src="src/ios/Printer.h" />
@@ -55,9 +55,9 @@
         For android This plugin requires libz.dylib that is available in the iOS SDK.
         If you will face a linker errors, you need to add the library manually.
 
-        If you want to print more than 4 pages on Android lower 4.4 iText will consume
-        too much memory. Add 'android:largeHeap="true"' as application attribute to
-        the Manifest.xml to "solve" this issue.
+        If you want to print more than 4 pages on Android 4.3 and lower, iText will consume
+        too much memory. To fix it add 'android:largeHeap="true"' as application attribute to
+        the Manifest.xml.
     </info>
 
 </plugin>
