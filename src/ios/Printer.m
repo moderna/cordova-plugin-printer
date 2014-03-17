@@ -19,9 +19,9 @@
  under the License.
  */
 
-#import "APPPrinter.h"
+#import "Printer.h"
 
-@interface APPPrinter (Private)
+@interface Printer (Private)
 
 // Erstellt den PrintController
 - (UIPrintInteractionController*) getPrintController;
@@ -37,7 +37,7 @@
 @end
 
 
-@implementation APPPrinter
+@implementation Printer
 
 /*
  * Is printing available.
@@ -92,7 +92,7 @@
     UIPrintInfo* printInfo    = [UIPrintInfo printInfo];
     printInfo.outputType      = UIPrintInfoOutputGeneral;
     controller.printInfo      = printInfo;
-    controller.showsPageRange = YES;
+    controller.showsPageRange = NO;
 
     return controller;
 }
@@ -109,12 +109,13 @@
     UIWebView* webPage    = [[UIWebView alloc] init];
 
     [webPage loadHTMLString:content baseURL:baseURL];
+    
+    NSLog(@"base url: %@", baseURL);
 
     // Get formatter for web (note: margin not required - done in web page)
     UIViewPrintFormatter* formatter = [webPage viewPrintFormatter];
 
     controller.printFormatter = formatter;
-    controller.showsPageRange = YES;
 }
 
 /**

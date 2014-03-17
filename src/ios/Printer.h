@@ -23,7 +23,7 @@
 #import <Cordova/CDVPlugin.h>
 
 
-@interface APPPrinter : CDVPlugin {
+@interface Printer : CDVPlugin {
 
 }
 
