@@ -30,12 +30,12 @@
 
         <config-file target="config.xml" parent="/*">
         <feature name="Printer">
-            <param name="ios-package" value="APPPrinter"/>
+            <param name="ios-package" value="Printer"/>
         </feature>
         </config-file>
 
-        <header-file src="src/ios/APPPrinter.h" />
-        <source-file src="src/ios/APPPrinter.m" />
+        <header-file src="src/ios/Printer.h" />
+        <source-file src="src/ios/Printer.m" />
 
     </platform>
 
