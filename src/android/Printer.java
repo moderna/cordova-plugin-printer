@@ -177,6 +177,13 @@ public class Printer extends CordovaPlugin
         final Printer self = this;
         final String content = args.optString(0, "<html></html>");
         this.ctx = ctx;
+        
+        if( showWebViewForDebugging )
+        {
+        	Log.v(LOG_TAG,"java print html called");
+        	Log.v(LOG_TAG, "Html start:" + content.substring(0, 500));
+        	Log.v(LOG_TAG, "Html end:" + content.substring(content.length() - 500));
+        }
 
         cordova.getActivity().runOnUiThread( new Runnable() {
             public void run()
@@ -436,8 +443,15 @@ public class Printer extends CordovaPlugin
         *  Making it small in the beginning has some effects on the html <body> (body
         *  width will always remain 100 if not set explicitly).
         */
-        activity.addContentView(page, new ViewGroup.LayoutParams(100, 100));
-        page.loadDataWithBaseURL(baseURL, content, "text/html", "utf-8", null);
+        if( !showWebViewForDebugging )
+        {
+        	activity.addContentView(page, new ViewGroup.LayoutParams(100, 100));
+        }
+        else
+        {
+        	activity.addContentView(page, new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        }
+    	page.loadDataWithBaseURL(baseURL, content, "text/html", "utf-8", null);
     }
     
     /**
