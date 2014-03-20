@@ -416,20 +416,24 @@ public class Printer extends CordovaPlugin
                   public void run()
                   {
                         // slice the web screenshot into pages and save as pdf
-                        File tmpFile = self.saveWebViewAsPdf(getWebViewAsBitmap(page));
+						Bitmap b = getWebViewAsBitmap(page);
+						if( b != null )
+						{
+							File tmpFile = self.saveWebViewAsPdf();
 
-                        // add pdf as stream to the print intent
-                        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(tmpFile));
+							// add pdf as stream to the print intent
+							intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(tmpFile));
 
-                        // remove the webview
-                        if( !self.showWebViewForDebugging )
-                        {
-                        	ViewGroup vg = (ViewGroup)(page.getParent());
-                        	vg.removeView(page);
-                        }
-                        
-                        // start the print app (trigger the print intent)
-                		self.startPrinterApp(self.printIntent);
+							// remove the webview
+							if( !self.showWebViewForDebugging )
+							{
+								ViewGroup vg = (ViewGroup)(page.getParent());
+								vg.removeView(page);
+							}
+							
+							// start the print app (trigger the print intent)
+							self.startPrinterApp(self.printIntent);
+						}
                   }
                 }, 100);
             }
@@ -495,8 +499,7 @@ public class Printer extends CordovaPlugin
             result.setKeepCallback(false);
             ctx.sendPluginResult(result);
             
-            b = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-        	return b;
+        	return null;
         }
         
         Log.v(LOG_TAG, "Print.getWebViewAsBitmap -> Content width: " + width + ", height: " + height );
