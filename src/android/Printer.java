@@ -435,7 +435,7 @@ public class Printer extends CordovaPlugin
 							self.startPrinterApp(self.printIntent);
 						}
                   }
-                }, 100);
+                }, 500);
             }
         });
 
