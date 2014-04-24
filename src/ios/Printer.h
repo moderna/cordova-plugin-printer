@@ -1,6 +1,7 @@
 /*
  Copyright 2013 appPlant UG
-
+ Updated by Modern Alchemist OG on 23/04/2014
+ 
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
  distributed with this work for additional information
@@ -29,7 +30,11 @@
 
 // Prints the content
 - (void) print:(CDVInvokedUrlCommand*)command;
+
 // Find out whether printing is supported on this platform
 - (void) isServiceAvailable:(CDVInvokedUrlCommand*)command;
+
+// retain command for async repsonses
+@property (nonatomic, strong) CDVInvokedUrlCommand* pluginCommand;
 
 @end

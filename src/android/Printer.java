@@ -419,7 +419,7 @@ public class Printer extends CordovaPlugin
 						Bitmap b = getWebViewAsBitmap(page);
 						if( b != null )
 						{
-							File tmpFile = self.saveWebViewAsPdf();
+							File tmpFile = self.saveWebViewAsPdf(b);
 
 							// add pdf as stream to the print intent
 							intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(tmpFile));

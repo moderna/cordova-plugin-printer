@@ -1,5 +1,6 @@
 /*
  Copyright 2013 appPlant UG
+ Updated by Modern Alchemist OG on 23/04/2014
 
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -17,27 +18,31 @@
  KIND, either express or implied.  See the License for the
  specific language governing permissions and limitations
  under the License.
+ 
  */
 
 #import "Printer.h"
 
 @interface Printer (Private)
 
-// Erstellt den PrintController
+// create print controller
 - (UIPrintInteractionController*) getPrintController;
-// Stellt die Eigenschaften des Druckers ein.
+
+// configure the print settings
 - (UIPrintInteractionController*) adjustSettingsForPrintController:(UIPrintInteractionController*)controller;
-// Lädt den zu druckenden Content in ein WebView, welcher vom Drucker ausgedruckt werden soll.
+
+// loads web content into a print controller
 - (void) loadContent:(NSString*)content intoPrintController:(UIPrintInteractionController*)controller;
-// Ruft den Callback auf und informiert diesen über den das Ergebnis des Druckvorgangs.
-- (void) informAboutResult:(int)code callbackId:(NSString*)callbackId;
-// Überprüft, ob der Drucker-Dienst verfügbar ist
+
+// Checks if there is a print service
 - (BOOL) isPrintServiceAvailable;
 
 @end
 
 
 @implementation Printer
+
+@synthesize pluginCommand;
 
 /*
  * Is printing available.
@@ -53,8 +58,7 @@
 }
 
 /**
- * Öffnet den Drucker-Kontroller zur Auswahl des Druckers.
- * Callback gibt Meta-Informationen an.
+ * Creates and opens the print controller.
  */
 - (void) print:(CDVInvokedUrlCommand*)command
 {
@@ -63,6 +67,8 @@
         return;
     }
 
+    self.pluginCommand = command;
+    
     NSArray*  arguments  = [command arguments];
     NSString* content    = [arguments objectAtIndex:0];
 
@@ -77,7 +83,7 @@
 }
 
 /**
- * Erstellt den PrintController.
+ * Creates the print controller.
  */
 - (UIPrintInteractionController*) getPrintController
 {
@@ -85,7 +91,7 @@
 }
 
 /**
- * Stellt die Eigenschaften des Druckers ein.
+ * Configure the printer.
  */
 - (UIPrintInteractionController*) adjustSettingsForPrintController:(UIPrintInteractionController*)controller
 {
@@ -98,7 +104,7 @@
 }
 
 /**
- * Lädt den zu druckenden Content in ein WebView, welcher vom Drucker ausgedruckt werden soll.
+ * Loads the html content into a printable webview.
  */
 - (void) loadContent:(NSString*)content intoPrintController:(UIPrintInteractionController*)controller
 {
@@ -119,17 +125,41 @@
 }
 
 /**
- * Zeigt den PrintController an.
+ * Show the print controller.
  */
 - (void) openPrintController:(UIPrintInteractionController*)controller
 {
-    //[self.commandDelegate runInBackground:^{
-        [controller presentAnimated:YES completionHandler:NULL];
-    //}];
+    // We need a completion handler block for printing.
+    UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error)
+    {
+        if(completed)
+        {
+            CDVPluginResult* pluginResult;
+            if( error )
+            {
+                NSLog(@"Printing failed due to error in domain %@ with error code %u", error.domain, error.code);
+                
+                // create cordova result
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                 messageAsString:[@"Printing failed" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                // send cordova result
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:self.pluginCommand.callbackId];
+            }
+            else
+            {
+                // create cordova result
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                // send cordova result
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:self.pluginCommand.callbackId];
+            }
+        }
+    };
+    
+    [controller presentAnimated:YES completionHandler:completionHandler];
 }
 
 /**
- * Überprüft, ob der Drucker-Dienst verfügbar ist.
+ * Check if there is a print service available.
  */
 - (BOOL) isPrintServiceAvailable
 {
