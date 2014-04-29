@@ -132,9 +132,9 @@
     // We need a completion handler block for printing.
     UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error)
     {
+        CDVPluginResult* pluginResult;
         if(completed)
         {
-            CDVPluginResult* pluginResult;
             if( error )
             {
                 NSLog(@"Printing failed due to error in domain %@ with error code %u", error.domain, error.code);
@@ -152,6 +152,16 @@
                 // send cordova result
                 [self.commandDelegate sendPluginResult:pluginResult callbackId:self.pluginCommand.callbackId];
             }
+        }
+        else
+        {
+            NSLog(@"Printing canceled by user.");
+            
+            // create cordova result
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                             messageAsString:[@"canceled" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            // send cordova result
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.pluginCommand.callbackId];
         }
     };
     
