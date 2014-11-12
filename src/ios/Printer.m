@@ -165,7 +165,18 @@
         }
     };
     
-    [controller presentAnimated:YES completionHandler:completionHandler];
+    if( CDV_IsIPad() )
+    {
+        UIView* view = self.webView.superview;
+        CGRect rect = view.frame; // open in top center
+        rect.size.height *= 0.02;
+        [controller presentFromRect:rect inView:view animated:YES completionHandler:completionHandler];
+    }
+    else
+    {
+        [controller presentAnimated:YES completionHandler:completionHandler];
+
+    }
 }
 
 /**
