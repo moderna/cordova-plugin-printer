@@ -1,15 +1,15 @@
 Cordova Printer-Plugin
 ======================
 
-A bunch of printing plugins for Cordova 3.x.x
+A printig plugin for Cordova 6.1.1+ (android >= 4.1 and ios >= 6)
 
-by Sebastián Katzer ([github.com/katzer](https://github.com/katzer))
+original credit goes to Sebastián Katzer ([github.com/katzer](https://github.com/katzer))
 
 ## Supported Platforms
 - **iOS** *(Print from iOS devices to AirPrint compatible printers)*<br>
 See [Drawing and Printing Guide for iOS](http://developer.apple.com/library/ios/documentation/2ddrawing/conceptual/drawingprintingios/Printing/Printing.html) for detailed informations and screenshots.
 
-- **Android** *(SDK 19)*
+- **Android** *(SDK 23+)*
 
 ## Adding the Plugin to your project
 Through the [Command-line Interface](http://cordova.apache.org/docs/en/3.0.0/guide_cli_index.md.html#The%20Command-line%20Interface):

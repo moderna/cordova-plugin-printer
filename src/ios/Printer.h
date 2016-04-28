@@ -34,6 +34,8 @@
 // Find out whether printing is supported on this platform
 - (void) isServiceAvailable:(CDVInvokedUrlCommand*)command;
 
+- (BOOL) isIpad;
+
 // retain command for async repsonses
 @property (nonatomic, strong) CDVInvokedUrlCommand* pluginCommand;
 

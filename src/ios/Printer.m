@@ -165,7 +165,7 @@
         }
     };
     
-    if( CDV_IsIPad() )
+    if( [self isIpad] )
     {
         UIView* view = self.webView.superview;
         CGRect rect = view.frame; // open in top center
@@ -177,6 +177,15 @@
         [controller presentAnimated:YES completionHandler:completionHandler];
 
     }
+}
+
+- (BOOL) isIpad
+{
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        return YES; /* Device is iPad */
+    }
+    return NO;
 }
 
 /**
