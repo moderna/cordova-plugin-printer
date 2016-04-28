@@ -25,6 +25,13 @@ cordova plugin rm de.appplant.cordova.plugin.printer
 ```
 
 ## Release Notes
+#### Version 1.0.0 (28.4.2016)
+- compatibility release for cordova 6.1.1+ (tested on 6.1.1)
+
+#### Version 0.6.0 (27.4.2016)
+- Release created for old versins (cordova 3.3.x)
+- We ahve never tested it on 4.x or 5.x
+
 #### Version 0.5.0 (11.12.2013)
 - Release under the Apache 2.0 license.
 - [***change:***] Removed the `callback` property from the `print` interface.
